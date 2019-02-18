@@ -71,7 +71,8 @@ def unzip7(archive_file, unpack_path):
     :return: 7z.exe return code
     """
     unzip_file = P7UNZIP_COMMAND.format(archive_file, unpack_path)
-    print(unzip_file)
+    logger.info("Unzip file {0}".format(archive_file))
+    logger.info(unzip_file)
     return os.system(unzip_file)
 
 
@@ -156,10 +157,9 @@ def build_qt(qt_sources, qt_version, target, install_path):
     if not os.path.exists(qt_sources):
         raise RuntimeError('Cannot detect Qt sources')
     os.chdir(get_dir_from_path(qt_sources))
-    print("Current directory {0}".format(os.getcwd()))
+    logger.info("Current directory {0}".format(os.getcwd()))
     unzip_folder_path = get_filename_from_path(qt_sources)
     unzip7(qt_sources, unzip_folder_path)
-    print(get_filename_from_path(qt_sources))
 
     # 2. Set environment
     # target_switch = get_target_cmd(target)
